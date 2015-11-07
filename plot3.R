@@ -1,3 +1,4 @@
+# Data is read to the system
 House<-read.table("household_power_consumption.txt",
                   header = T,
                   sep = ";",
@@ -6,6 +7,7 @@ House<-read.table("household_power_consumption.txt",
                   stringsAsFactors = F,
                   na.strings = "?")
 
+# Col names are reasigned
 Housecolnames<-read.table("household_power_consumption.txt",
                           header = F,
                           sep = ";",
@@ -22,9 +24,14 @@ colnames(House)<-Housecolnames
 # # change locale to English
 # Sys.setlocale("LC_ALL", "English")
 
+# 
+# Date and time columns were merged and converted to "date" class
+
 House$Datetime<-paste(House$Date,House$Time)
 House$Datetime<-strptime(House$Datetime,
                          format="%d/%m/%Y %T")
+
+# PNG device is initiated and plots created
 
 png(filename = "plot3.png")
 with(House,
@@ -36,6 +43,8 @@ with(House,
           ylab = "Energy sub metering"
           )
 )
+
+# Adding extra lines
 lines(House$Datetime,
       House$Sub_metering_2,
       type = "l",
@@ -45,6 +54,8 @@ lines(House$Datetime,
       House$Sub_metering_3,
       type = "l",
       col="blue")
+
+# Adding legend square
 legend("topright",
        lty = 1,
        col = c("black",

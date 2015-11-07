@@ -1,3 +1,4 @@
+# Data is read to the system
 House<-read.table("household_power_consumption.txt",
                   header = T,
                   sep = ";",
@@ -6,6 +7,7 @@ House<-read.table("household_power_consumption.txt",
                   stringsAsFactors = F,
                   na.strings = "?")
 
+# Col names are reasigned
 Housecolnames<-read.table("household_power_consumption.txt",
                           header = F,
                           sep = ";",
@@ -13,6 +15,9 @@ Housecolnames<-read.table("household_power_consumption.txt",
 Housecolnames<-lapply(Housecolnames,as.character)
 
 colnames(House)<-Housecolnames
+
+
+# PNG device is initiated and plots created
 
 png(filename = "plot1.png")
 
