@@ -14,6 +14,15 @@ Housecolnames<-lapply(Housecolnames,as.character)
 
 colnames(House)<-Housecolnames
 
+# #preserve the existing locale
+# #Those lines were used to generate png files.
+# #For users inside US should be left commented
+
+# my_locale <- Sys.getlocale("LC_ALL")
+# 
+# # change locale to English
+# Sys.setlocale("LC_ALL", "English")
+
 House$Datetime<-paste(House$Date,House$Time)
 House$Datetime<-strptime(House$Datetime,
                           format="%d/%m/%Y %T")
@@ -25,3 +34,6 @@ plot(House$Datetime,
      xlab = "",
      ylab = "Global Active Power (kilowatts)")
 dev.off()
+
+# ## restore locale
+# Sys.setlocale("LC_ALL", my_locale)
